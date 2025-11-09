@@ -46,6 +46,9 @@ jobs:
         run: |
           ruff format --check .
           ruff check .
+      - name: Test için .env dosyası oluştur
+        run: |
+          cp .env.example .env
         # Not: 'black --check' yerine 'ruff format --check' kullanıyoruz,
         # çünkü Görev 0.1'de ruff'ı black profiliyle zaten yapılandırmıştık.
         # Bu, daha hızlı ve daha temizdir.
