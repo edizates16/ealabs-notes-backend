@@ -1,0 +1,57 @@
+# .github/workflows/ci.yml
+
+# Workflow'umuzun adı (GitHub arayüzünde görünecek)
+name: Python Backend CI
+
+# Bu workflow'u ne zaman tetikleyeceğimiz
+on:
+  # 1. 'main' branch'ine yapılan 'push' (genellikle PR merge edilince)
+  push:
+    branches: [ "main" ]
+  # 2. 'main' branch'ine yönelik açılan 'pull_request' (AC'de istenen)
+  pull_request:
+    branches: [ "main" ]
+
+# Yapılacak işler (jobs)
+jobs:
+  # 'build-and-test' adında bir iş tanımlıyoruz
+  build-and-test:
+    # Bu işin çalışacağı sanal makine (Ubuntu'nun son sürümü)
+    runs-on: ubuntu-latest
+
+    # Adımlar (steps)
+    steps:
+      # 1. Adım: Kodu al (Checkout)
+      # Bu adım, reponuzdaki kodu sanal makineye kopyalar
+      - name: Kodu al (Checkout)
+        uses: actions/checkout@v4
+
+      # 2. Adım: Python 3.11'i kur
+      # Dockerfile'ımızda kullandığımız sürümle aynı
+      - name: Python 3.11 kur
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 3. Adım: Bağımlılıkları kur
+      # pyproject.toml dosyasındaki [dev] dahil tüm bağımlılıkları kurar
+      - name: Bağımlılıkları kur (Install dependencies)
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      # 4. Adım: Lint ve Format kontrolü (AC)
+      # Ruff kullanarak hem formatı (black) hem de lint kurallarını kontrol et
+      - name: Lint ve Format kontrolü (Ruff)
+        run: |
+          ruff format --check .
+          ruff check .
+        # Not: 'black --check' yerine 'ruff format --check' kullanıyoruz,
+        # çünkü Görev 0.1'de ruff'ı black profiliyle zaten yapılandırmıştık.
+        # Bu, daha hızlı ve daha temizdir.
+
+      # 5. Adım: Testleri çalıştır (AC)
+      # 'make test' komutumuzda olduğu gibi testleri çalıştırır
+      - name: Testleri çalıştır (Pytest)
+        run: |
+          pytest -q tests/

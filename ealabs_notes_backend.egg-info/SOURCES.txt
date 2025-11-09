@@ -1,0 +1,8 @@
+pyproject.toml
+app/__init__.py
+app/main.py
+ealabs_notes_backend.egg-info/PKG-INFO
+ealabs_notes_backend.egg-info/SOURCES.txt
+ealabs_notes_backend.egg-info/dependency_links.txt
+ealabs_notes_backend.egg-info/requires.txt
+ealabs_notes_backend.egg-info/top_level.txt

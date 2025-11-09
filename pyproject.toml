@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ealabs-notes-backend"
+version = "0.1.0"
+description = "Notes API backend"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "ediz ates", email = "edizates16@icloud.com" }]
+dependencies = [
+    "fastapi[all]",
+    "uvicorn",
+    "pydantic-settings",
+    "sqlalchemy",
+    "alembic",
+    "psycopg[binary]",
+    "asyncpg",
+    "redis",
+    "rq",
+    "python-multipart",
+    "boto3",
+    "python-jose[cryptography]",
+    "passlib[bcrypt]",
+    "pytz",
+    "python-dotenv",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "httpx",
+    "pytest-asyncio",
+    "ruff",
+    "black",
+    "isort",
+    "mypy",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 88
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.setuptools]
+# flat layout: kökteki paketleri otomatik bul
+packages = { find = {} }
