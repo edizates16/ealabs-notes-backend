@@ -4,7 +4,7 @@ import logging
 from fastapi import FastAPI
 from starlette import status
 from app.core.logging import setup_logging  # <-- YENİ İMPORT
-from app.core.config import settings        # <-- YENİ İMPORT
+from app.core.config import settings  # <-- YENİ İMPORT
 
 # --- Loglamayı Ayarla ---
 # FastAPI uygulamasını oluşturmadan HEMEN ÖNCE çağırıyoruz.
@@ -17,11 +17,12 @@ logging.debug("Bu bir DEBUG logudur, LOG_LEVEL=INFO ise görünmemeli.")
 
 # FastAPI uygulamasını oluştur
 app = FastAPI(
-    title=settings.APP_NAME, # Ayarları config'den al
+    title=settings.APP_NAME,  # Ayarları config'den al
     description="EALabs Not Alma Uygulaması API",
     version="0.1.0",
-    debug=settings.DEBUG,    # Debug modunu config'den al
+    debug=settings.DEBUG,  # Debug modunu config'den al
 )
+
 
 @app.get(
     "/healthz",

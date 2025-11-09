@@ -12,7 +12,7 @@ if DATABASE_URL is None:
 
 # Asenkron veritabanı motoru oluştur
 # pool_pre_ping=True: Bağlantıyı kullanmadan önce "canlı" olup olmadığını kontrol eder.
-# NullPool: Asenkron ortamda ve sunucusuz (serverless) senaryolarda bazen 
+# NullPool: Asenkron ortamda ve sunucusuz (serverless) senaryolarda bazen
 # SQLAlchemy'nin varsayılan bağlantı havuzu (QueuePool) yerine bu tercih edilir.
 # Geliştirme için şimdilik bu daha basit olabilir.
 async_engine = create_async_engine(DATABASE_URL, pool_pre_ping=True, poolclass=NullPool)
@@ -21,5 +21,5 @@ async_engine = create_async_engine(DATABASE_URL, pool_pre_ping=True, poolclass=N
 AsyncSessionLocal = async_sessionmaker(
     bind=async_engine,
     autoflush=False,
-    expire_on_commit=False, # Veri çekildikten sonra session kapansa bile objeleri kullanmamızı sağlar
+    expire_on_commit=False,  # Veri çekildikten sonra session kapansa bile objeleri kullanmamızı sağlar
 )

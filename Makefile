@@ -66,9 +66,9 @@ test:
 	$(COMPOSE) exec api pytest -q tests/
 
 format:
-	@echo "$(YELLOW)Ruff (format + lint) çalıştırılıyor...$(RESET)"
-	ruff format .
-	ruff check . --fix
+	@echo "$(YELLOW)'api' konteyneri içinde Ruff (format + lint) çalıştırılıyor...$(RESET)"
+	docker-compose exec api ruff format .
+	docker-compose exec api ruff check . --fix
 
 ## -----------------------------------------------------------------------------
 ## Yardım

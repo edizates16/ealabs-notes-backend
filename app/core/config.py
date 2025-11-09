@@ -1,7 +1,7 @@
 # app/core/config.py
 
-import os
 from pydantic_settings import BaseSettings
+
 
 class Settings(BaseSettings):
     """
@@ -36,8 +36,8 @@ class Settings(BaseSettings):
     class Config:
         # .env dosyasını oku
         env_file = ".env"
-        env_file_encoding = 'utf-8'
-        extra = 'ignore'
+        env_file_encoding = "utf-8"
+        extra = "ignore"
 
 
 # Ayarları global olarak kullanılabilir tek bir instance (örnek) olarak oluştur

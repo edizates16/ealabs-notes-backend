@@ -5,8 +5,6 @@ from sqlalchemy.pool import NullPool
 
 from logging.config import fileConfig
 from app.db.base import Base
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
 
 from alembic import context
 
@@ -37,6 +35,7 @@ target_metadata = Base.metadata
 
 # migrations/env.py (dosyanın sonundaki bölümü bununla değiştirin)
 
+
 def do_run_migrations(connection):
     """
     Migration'ları senkron bir şekilde çalıştıran yardımcı fonksiyon.
@@ -48,6 +47,7 @@ def do_run_migrations(connection):
     )
     with context.begin_transaction():
         context.run_migrations()
+
 
 async def run_migrations_online():
     """
