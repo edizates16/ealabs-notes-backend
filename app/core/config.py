@@ -1,7 +1,7 @@
 # app/core/config.py
-
+import os
 from pydantic_settings import BaseSettings
-
+from pydantic import ConfigDict
 
 class Settings(BaseSettings):
     """
@@ -34,10 +34,12 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
     class Config:
-        # .env dosyasını oku
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-        extra = "ignore"
+# Pydantic V2'nin yeni config modeli
+    model_config = ConfigDict(
+        env_file=".env",
+        env_file_encoding='utf-8',
+        extra='ignore'
+    )
 
 
 # Ayarları global olarak kullanılabilir tek bir instance (örnek) olarak oluştur
