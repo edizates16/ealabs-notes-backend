@@ -1,8 +1,8 @@
 # app/core/config.py
 
-import os
 from pydantic_settings import BaseSettings
 from pydantic import ConfigDict  # <-- Doğru import
+
 
 class Settings(BaseSettings):
     """
@@ -36,10 +36,9 @@ class Settings(BaseSettings):
 
     # --- Pydantic V2'nin yeni config modeli (class Config: YERİNE) ---
     model_config = ConfigDict(
-        env_file=".env",
-        env_file_encoding='utf-8',
-        extra='ignore'
+        env_file=".env", env_file_encoding="utf-8", extra="ignore"
     )
+
 
 # Ayarları global olarak kullanılabilir tek bir instance (örnek) olarak oluştur
 settings = Settings()
